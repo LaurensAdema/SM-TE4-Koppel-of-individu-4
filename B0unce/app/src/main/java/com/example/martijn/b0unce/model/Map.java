@@ -1,7 +1,5 @@
 package com.example.martijn.b0unce.model;
 
-import android.graphics.Point;
-
 import com.example.martijn.b0unce.model.ball.Ball;
 import com.example.martijn.b0unce.model.ball.Circle;
 import com.example.martijn.b0unce.model.obstacles.Accelerator;
@@ -12,6 +10,7 @@ import com.example.martijn.b0unce.model.obstacles.ReSwipe;
 import com.example.martijn.b0unce.model.obstacles.SpeedDown;
 import com.example.martijn.b0unce.model.obstacles.SpeedUp;
 import com.example.martijn.b0unce.model.obstacles.Wall;
+import com.example.martijn.b0unce.model.resources.GamePoint;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +23,7 @@ import java.util.HashMap;
  * Created by Martijn on 20-4-2016.
  */
 public class Map {
-    private HashMap<Point, MapObject> obstacles;
+    private HashMap<GamePoint, MapObject> obstacles;
     private int level;
     private String name;
     private Account author;
@@ -32,7 +31,10 @@ public class Map {
     private int maxBounces;
     private boolean swipe;
 
-    public Map(Account player, int level, String name, HashMap<Point, MapObject> map) {
+    public static int GRIDSIZE = 9;
+    public static int MULTIPLIER = 2;
+
+    public Map(Account player, int level, String name, HashMap<GamePoint, MapObject> map) {
         swipe = true;
         highscores = new HashMap<>();
         this.level = level;
@@ -41,7 +43,7 @@ public class Map {
         this.obstacles = map;
     }
 
-    public static HashMap<Point, MapObject> generateMap(File file) {
+    public static HashMap<GamePoint, MapObject> generateMap(File file) {
         /**
          * Obstacle overview:
          * - wall           : W
@@ -54,9 +56,9 @@ public class Map {
          * - Ball:          : O
          */
 
-        HashMap<Point, MapObject> map = new HashMap<>();
+        HashMap<GamePoint, MapObject> map = new HashMap<>();
 
-        int y = 10 - 1;
+        int y = GRIDSIZE - 1;
         int x = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -70,28 +72,28 @@ public class Map {
                         case '0':
                             break;
                         case 'W':
-                            map.put(new Point(x,y), new Wall());
+                            map.put(new GamePoint(x,y), new Wall());
                             break;
                         case 'R':
-                            map.put(new Point(x,y), new ReSwipe());
+                            map.put(new GamePoint(x,y), new ReSwipe());
                             break;
                         case '-':
-                            map.put(new Point(x,y), new SpeedDown());
+                            map.put(new GamePoint(x,y), new SpeedDown(MULTIPLIER));
                             break;
                         case '+':
-                            map.put(new Point(x,y), new SpeedUp());
+                            map.put(new GamePoint(x,y), new SpeedUp(MULTIPLIER));
                             break;
                         case 'G':
-                            map.put(new Point(x,y), new Gyroscope());
+                            map.put(new GamePoint(x,y), new Gyroscope());
                             break;
                         case 'A':
-                            map.put(new Point(x,y), new Accelerator());
+                            map.put(new GamePoint(x,y), new Accelerator());
                             break;
                         case 'D':
-                            map.put(new Point(x,y), new Ramp());
+                            map.put(new GamePoint(x,y), new Ramp());
                             break;
                         case 'O':
-                            map.put(new Point(x,y), new Ball(new Point(x,y), 1, new Circle()));
+                            map.put(new GamePoint(x,y), new Ball(new GamePoint(x,y), 1, new Circle()));
                             break;
                     }
 
@@ -107,5 +109,9 @@ public class Map {
         }
 
         return map;
+    }
+
+    public void setSwipe(boolean swipe) {
+        this.swipe = swipe;
     }
 }
