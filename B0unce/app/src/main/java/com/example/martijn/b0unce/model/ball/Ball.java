@@ -3,11 +3,12 @@ package com.example.martijn.b0unce.model.ball;
 import android.graphics.Point;
 
 import com.example.martijn.b0unce.model.Map;
+import com.example.martijn.b0unce.model.MapObject;
 
 /**
  * Created by Martijn on 20-4-2016.
  */
-public class Ball {
+public class Ball extends MapObject{
     private float speed;
     private float weight;
     private BallType type;
@@ -19,11 +20,16 @@ public class Ball {
     private static int MAXSPEED = 5;
     private static double RADIUS = 0.7;
 
-    public Ball(Point position, int weight, Map map, BallType type) {
+    public Ball(Point position, int weight, BallType type) {
         this.position   = position;
         this.weight     = weight;
         this.map        = map;
         this.type       = type;
+    }
+
+    public void setMap(Map map)
+    {
+        this.map = map;
     }
 
     public void Move() {
