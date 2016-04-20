@@ -17,19 +17,15 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        ImageView backBtn = (ImageView) findViewById(R.id.backButton);
-        backBtn.setVisibility(View.GONE);
-
-        final Home that = this;
-
-        findViewById(R.id.titleButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(that, Overview.class);
-                startActivity(myIntent);
-            }
-        });
     }
 
+    public void startGame(View v)
+    {
+        startActivity(new Intent(Home.this, Game.class));
+    }
+
+    public void startHome(View v)
+    {
+        startActivity(new Intent(Home.this, Home.class));
+    }
 }
