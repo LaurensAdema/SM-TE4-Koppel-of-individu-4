@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+    tools:context="com.example.martijn.b0unce.Home"
+    android:divider="#010000"
+    android:dividerPadding="10dp">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:columnCount="5"
+        android:rowCount="1"
+        android:padding="10dp"
+        android:id="@+id/header"
+        android:background="@color/background">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/backButton"
+            android:layout_column="0"
+            android:layout_columnSpan="4"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/titleButton"
+            android:layout_column="4"
+            android:layout_columnSpan="1"
+            android:layout_alignParentLeft="false"
+            android:layout_marginLeft="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/content">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:columnCount="10"
+            android:rowCount="10"
+            android:background="#171717"
+            android:id="@+id/gameGrid"
+            android:horizontalSpacing="1dp"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="1dp"
+            android:columnOrderPreserved="true">
+        </GridLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/info"
+        android:background="@color/background"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"></RelativeLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:id="@+id/infoDivider"
+            android:background="#000000"
+            android:layout_alignParentBottom="false"
+            android:layout_alignWithParentIfMissing="false" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/footers"
+            android:background="@color/background"
+            android:columnCount="3"
+            android:rowCount="1"
+            android:layout_alignParentBottom="false"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/prevButton"
+                android:layout_column="0"
+                android:layout_columnSpan="1"
+                android:layout_row="0"
+                android:layout_rowSpan="1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Level: 0"
+                android:id="@+id/levelText"
+                android:textColor="#ffffff"
+                android:layout_column="1"
+                android:layout_columnSpan="1"
+                android:layout_row="0"
+                android:layout_rowSpan="1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                android:textAlignment="center"
+                android:textIsSelectable="false"
+                android:textSize="20dp"
+                android:width="6dp"
+                android:textStyle="bold"
+                android:padding="5dp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/nextButton"
+                android:layout_column="2"
+                android:layout_columnSpan="1"
+                android:layout_row="0"
+                android:layout_rowSpan="1"
+                android:layout_alignParentLeft="false"
+                android:layout_marginLeft="868dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
