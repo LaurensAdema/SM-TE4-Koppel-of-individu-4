@@ -5,13 +5,14 @@ import android.graphics.Point;
 
 import com.example.martijn.b0unce.model.MapObject;
 import com.example.martijn.b0unce.model.ball.Ball;
+import com.example.martijn.b0unce.model.resources.GamePoint;
 
 /**
  * Created by Martijn on 20-4-2016.
  */
 public abstract class Obstacle extends MapObject{
     private Paint texture;
-    private Point position;
+    private GamePoint position;
 
     public abstract void enter(Ball ball);
     public abstract void leave(Ball ball);
