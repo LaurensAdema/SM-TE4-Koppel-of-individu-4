@@ -8,4 +8,6 @@ import java.util.List;
 public class Game {
     private List<Map> challanges;
     private Account logged;
+
+
 }

@@ -23,32 +23,39 @@
 
         <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:id="@+id/titleButton"
             android:layout_column="4"
             android:layout_columnSpan="1"
             android:layout_alignParentLeft="false"
             android:layout_marginLeft="48dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
             android:layout_alignParentRight="true"
-            android:onClick="startHome" />
+            android:onClick="startHome"
+            android:src="@mipmap/title"
+            android:adjustViewBounds="true"
+            android:baselineAlignBottom="false"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:layout_alignParentStart="false"
+            android:padding="0dp"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="false" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:id="@+id/content"
-        android:background="#171717">
+        android:layout_height="350dp">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/playBtn"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="58dp"
-            android:onClick="startGame" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/game"
+            android:background="#0E0A12"
+            android:stretchColumns="*">
+
+        </TableLayout>
     </RelativeLayout>
 
     <LinearLayout
@@ -83,54 +90,6 @@
             android:layout_alignParentBottom="false"
             android:padding="5dp">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="fill_parent"
-                android:id="@+id/prevButton"
-                android:layout_column="0"
-                android:layout_columnSpan="1"
-                android:layout_row="0"
-                android:layout_rowSpan="1"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="0dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="Level: 0"
-                android:id="@+id/levelText"
-                android:textColor="#ffffff"
-                android:layout_column="1"
-                android:layout_columnSpan="1"
-                android:layout_row="0"
-                android:layout_rowSpan="1"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="50dp"
-                android:textAlignment="center"
-                android:textIsSelectable="false"
-                android:textSize="20dp"
-                android:width="6dp"
-                android:textStyle="bold"
-                android:padding="5dp" />
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="fill_parent"
-                android:id="@+id/nextButton"
-                android:layout_column="2"
-                android:layout_columnSpan="1"
-                android:layout_row="0"
-                android:layout_rowSpan="1"
-                android:layout_alignParentLeft="false"
-                android:layout_marginLeft="868dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="0dp"
-                android:layout_alignParentRight="true" />
         </RelativeLayout>
 
     </LinearLayout>

@@ -3,10 +3,12 @@ package com.example.martijn.b0unce.model.resources;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Created by laure on 21-4-2016.
  */
-public class GamePoint implements Parcelable{
+public class GamePoint implements Parcelable, Serializable {
     public float x;
     public float y;
 

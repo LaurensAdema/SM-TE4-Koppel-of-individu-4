@@ -90,4 +90,12 @@ public class Ball extends MapObject{
         if((speed-=0.5) < 0)
             speed = 0;
     }
+
+    public GamePoint getPosition() {
+        return position;
+    }
+
+    public int getBounces() {
+        return bounces;
+    }
 }

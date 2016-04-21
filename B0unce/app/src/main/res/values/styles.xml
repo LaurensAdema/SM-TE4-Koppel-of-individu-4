@@ -17,4 +17,18 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="gameRow">
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="gameColumn">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:background">#171717</item>
+    </style>
+    <style name="menuItem">
+        <item name="android:layout_weight">6</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:background">#0E0A12</item>
+    </style>
+
 </resources>

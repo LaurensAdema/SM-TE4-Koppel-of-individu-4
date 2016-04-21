@@ -17,12 +17,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by Martijn on 20-4-2016.
  */
-public class Map {
+public class Map implements Serializable {
     private HashMap<GamePoint, MapObject> obstacles;
     private int level;
     private String name;
@@ -31,17 +32,50 @@ public class Map {
     private int maxBounces;
     private boolean swipe;
 
-    public static int GRIDSIZE = 9;
+    private Ball ball;
+
+    public static int GRIDSIZE = 10;
     public static int MULTIPLIER = 2;
 
-    public Map(Account player, int level, String name, HashMap<GamePoint, MapObject> map) {
+    public Map(Account player, int level, int maxBounces, String name, HashMap<GamePoint, MapObject> map, Ball ball) {
         swipe = true;
         highscores = new HashMap<>();
         this.level = level;
         this.name = name;
         this.author = player;
         this.obstacles = map;
+        this.ball = ball;
+        this.maxBounces = maxBounces;
     }
+
+    public MapObject getObstacle(int x, int y) {
+        return null;
+    }
+
+    public boolean tick() {
+        // TODO update
+        ball.Move();
+        return true;
+    }
+
+    public int getMaxBounces() {
+        return maxBounces;
+    }
+
+    public boolean Swipe(double angle) {
+        if(swipe) {
+            //TODO: Move ball
+            return true;
+        }
+
+        return false;
+    }
+
+    public Ball getBall()
+    {
+        return ball;
+    }
+
 
     public static HashMap<GamePoint, MapObject> generateMap(File file) {
         /**
