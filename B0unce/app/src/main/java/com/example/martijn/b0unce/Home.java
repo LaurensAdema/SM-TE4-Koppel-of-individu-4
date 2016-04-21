@@ -82,7 +82,7 @@ public class Home extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent level = new Intent(Home.this, Game.class);
-                            level.putExtra("level", new Map(null, 0, 5, "Test", new HashMap<GamePoint, MapObject>(), new Ball(new GamePoint(20,20), 1, new Circle())));
+                            level.putExtra("level", new Map(null, 0, 5, "Test", new HashMap<GamePoint, MapObject>(), new Ball(new GamePoint(2,2), 1, new Circle())));
                             startActivity(level);
                         }
                     });

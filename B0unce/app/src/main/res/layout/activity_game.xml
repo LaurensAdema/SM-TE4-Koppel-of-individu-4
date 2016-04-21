@@ -31,7 +31,9 @@
             android:layout_marginLeft="0dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:onClick="back" />
+            android:onClick="back"
+            android:src="@android:drawable/arrow_up_float"
+            android:background="@null" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -68,6 +70,17 @@
 
 
         </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game Over"
+            android:id="@+id/failedTxt"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#ffffff"
+            android:textSize="50dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout

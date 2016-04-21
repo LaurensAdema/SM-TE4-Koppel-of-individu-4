@@ -22,7 +22,7 @@ public class Ball extends MapObject{
     private int direction;
     private int bounces;
 
-    private static int MAXSPEED = 5;
+    private static float MAXSPEED = 0.8f;
     public static double RADIUS = 0.7;
 
     public Ball(GamePoint position, int weight, BallType type) {
@@ -40,9 +40,25 @@ public class Ball extends MapObject{
         if(speed > 0)
         {
             GamePoint newPos = this.type.move(position, direction, speed);
-            if (newPos.x < 0 || newPos.y > Map.GRIDSIZE) {
                 ArrayList<MapObject> collision = GameMech.Collision(this, newPos);
                 boolean posOK = true;
+                if ((newPos.x <= 0 || newPos.x+Ball.RADIUS >= Map.GRIDSIZE) || (newPos.y <= 0 || newPos.y+Ball.RADIUS >= Map.GRIDSIZE)) {
+
+                    double normal = 0;
+                    if(newPos.x <= 0)
+                        normal = 180;
+                    if(newPos.x + Ball.RADIUS >= Map.GRIDSIZE)
+                        normal = 360;
+                    if(newPos.y <= 0)
+                        normal = 270;
+                    if(newPos.y + Ball.RADIUS >= Map.GRIDSIZE)
+                        normal = 90;
+
+
+                    direction = (int) Math.floor(2 * normal - 180 - direction)%360;
+
+                    bounces++;
+                }
                 for (MapObject collisionObject: collision) {
                     switch (collisionObject.getClass().getSimpleName())
                     {
@@ -71,10 +87,10 @@ public class Ball extends MapObject{
                 {
                     this.position = newPos;
                 }
-                speed -= 0.5 * weight;
-            } else {
+                speed -= 0.002 * weight;
+
+            if(bounces > map.getMaxBounces())
                 speed = 0;
-            }
         }
     }
 
@@ -94,6 +110,7 @@ public class Ball extends MapObject{
 
     public void setDirection(int direction) {
         this.direction = direction;
+        speed = 0.5f;
     }
 
     public BallType getType() {

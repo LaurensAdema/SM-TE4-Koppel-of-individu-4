@@ -42,6 +42,11 @@ public class Game extends AppCompatActivity {
     private GamePoint down;
     private GamePoint up;
 
+    private float columnWidth;
+    private float columnHeight;
+
+    private TableRow column;
+
 
 
     @Override
@@ -53,6 +58,8 @@ public class Game extends AppCompatActivity {
         map.getBall().setMap(map);
 
         TableLayout content = (TableLayout) findViewById(R.id.game);
+
+        column = null;
 
         for (int row = 0; row < 10; row++) {
             TableRow tablerow = new TableRow(this);
@@ -77,7 +84,7 @@ public class Game extends AppCompatActivity {
                     tv.setBackgroundColor(((Obstacle)f).getTexture());
 
                 tablecolumn.addView(tv);
-
+                column = tablecolumn;
                 tablerow.addView(tablecolumn);
             }
             content.addView(tablerow);
@@ -90,8 +97,6 @@ public class Game extends AppCompatActivity {
 
         ball = new ImageView(this);
         ball.setImageResource(R.drawable.circle);
-        ball.setX(map.getBall().getPosition().x);
-        ball.setY(map.getBall().getPosition().y);
         rel.addView(ball);
 
         content.setOnTouchListener(new View.OnTouchListener() {
@@ -108,7 +113,7 @@ public class Game extends AppCompatActivity {
                         up = new GamePoint(event.getX(), event.getY());
 
                         double rad = Math.atan2(down.y-up.y,down.x-up.x) + Math.PI;
-                        double angle = (rad * 180 / Math.PI + 180) % 360;
+                        double angle = (rad * 180 / Math.PI + 360) % 360;
                         map.Swipe(((int) angle));
 
                         /*AlertDialog.Builder alertbox = new AlertDialog.Builder(Game.this);
@@ -131,30 +136,64 @@ public class Game extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        new Thread(new Runnable() {
-            @Override
+        Thread timer = new Thread() { //new thread
             public void run() {
-                ball.setX(map.getBall().getPosition().x);
-                ball.setY(map.getBall().getPosition().y);
-                bounce.setText(map.getBall().getBounces()+"");
+                boolean run = true;
                 try {
-                    Thread.sleep(1000/30);
-                } catch (InterruptedException e) {}
-            }
-        }).start();
+                    do {
+                        sleep(1000/30);
+
+                        if(map.getBall().getBounces() > map.getMaxBounces()) {
+                            run = false;
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    TextView failed = (TextView) findViewById(R.id.failedTxt);
+                                    failed.setVisibility(View.VISIBLE);
+                                }
+                            });
+                        }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+
+                                ball.setX(map.getBall().getPosition().x * column.getMeasuredWidth() );
+                                ball.setY(map.getBall().getPosition().y * column.getMeasuredHeight());
+                                bounce.setText(map.getBall().getBounces() + "");
+                            }
+                        });
+
+
+
+                    }
+                    while (run == true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                finally {
+                }
+            };
+        };
+        timer.start();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                map.tick();
-                try {
-                    Thread.sleep(1000/30);
-                } catch (InterruptedException e) {}
+                while(true) {
+                    map.tick();
+                    try {
+                        Thread.sleep(1000 / 30);
+                    } catch (InterruptedException e) {
+                    }
+                }
             }
         }).start();
 
     }
 
+    public void reTry(View v) { Intent r = new Intent(Game.this, Game.class); map.reset(); r.putExtra("level", this.map); startActivity(r); }
 
     public void startHome(View v) {
         startActivity(new Intent(Game.this, Home.class));

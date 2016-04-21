@@ -33,6 +33,7 @@ public class Map implements Serializable {
     private boolean swipe;
 
     private Ball ball;
+    private Ball ori;
 
     public static int GRIDSIZE = 10;
 
@@ -45,6 +46,11 @@ public class Map implements Serializable {
         this.obstacles = map;
         this.ball = ball;
         this.maxBounces = maxBounces;
+        ori = ball;
+    }
+
+    public void reset() {
+        ball = ori;
     }
 
     public MapObject getObstacle(int x, int y) {
@@ -53,10 +59,7 @@ public class Map implements Serializable {
 
     public boolean tick() {
         // TODO update
-        if(!swipe)
-        {
-            ball.Move();
-        }
+        ball.Move();
         return true;
     }
 
@@ -65,9 +68,9 @@ public class Map implements Serializable {
     }
 
     public boolean Swipe(int angle) {
-        if(!swipe) {
+        if(swipe) {
             //TODO: Move ball
-            swipe = true;
+            swipe = false;
             ball.setDirection(angle);
             return true;
         }
