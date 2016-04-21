@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,6 +26,7 @@ import com.example.martijn.b0unce.model.Map;
 import com.example.martijn.b0unce.model.MapObject;
 import com.example.martijn.b0unce.model.ball.Ball;
 import com.example.martijn.b0unce.model.ball.Circle;
+import com.example.martijn.b0unce.model.obstacles.Wall;
 import com.example.martijn.b0unce.model.resources.GamePoint;
 
 import org.w3c.dom.Text;
@@ -82,7 +84,9 @@ public class Home extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent level = new Intent(Home.this, Game.class);
-                            level.putExtra("level", new Map(null, 0, 5, "Test", new HashMap<GamePoint, MapObject>(), new Ball(new GamePoint(2,2), 1, new Circle())));
+                            HashMap<GamePoint, MapObject> obs = new HashMap<GamePoint, MapObject>();
+                            obs.put(new GamePoint(5,5), new Wall(new GamePoint(5, 5)));
+                            level.putExtra("level", new Map(null, 0, 5, "Test", obs, new Ball(new GamePoint(2,2), 1, new Circle())));
                             startActivity(level);
                         }
                     });

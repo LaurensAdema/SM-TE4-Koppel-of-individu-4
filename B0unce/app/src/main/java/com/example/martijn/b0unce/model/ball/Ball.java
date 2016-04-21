@@ -26,7 +26,7 @@ public class Ball extends MapObject{
     public static double RADIUS = 0.7;
 
     public Ball(GamePoint position, int weight, BallType type) {
-        this.position   = position;
+        super(position);
         this.weight     = weight;
         this.type       = type;
     }

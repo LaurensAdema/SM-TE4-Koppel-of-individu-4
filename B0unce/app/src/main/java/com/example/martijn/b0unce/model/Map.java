@@ -1,5 +1,7 @@
 package com.example.martijn.b0unce.model;
 
+import android.graphics.Point;
+
 import com.example.martijn.b0unce.model.ball.Ball;
 import com.example.martijn.b0unce.model.ball.Circle;
 import com.example.martijn.b0unce.model.obstacles.Accelerator;
@@ -54,6 +56,14 @@ public class Map implements Serializable {
     }
 
     public MapObject getObstacle(int x, int y) {
+        for(MapObject mo : obstacles.values()) {
+            float xo = mo.getPosition().x;
+            float yo =  mo.getPosition().y;
+
+            if(xo == (float)x && yo == (float)y) {
+                return mo;
+            }
+        }
         return null;
     }
 
@@ -112,25 +122,25 @@ public class Map implements Serializable {
                         case '0':
                             break;
                         case 'W':
-                            map.put(new GamePoint(x,y), new Wall());
+                            map.put(new GamePoint(x,y), new Wall(new GamePoint(x,y)));
                             break;
                         case 'R':
-                            map.put(new GamePoint(x,y), new ReSwipe());
+                            map.put(new GamePoint(x,y), new ReSwipe(new GamePoint(x,y)));
                             break;
                         case '-':
-                            map.put(new GamePoint(x,y), new SpeedDown());
+                            map.put(new GamePoint(x,y), new SpeedDown(new GamePoint(x,y)));
                             break;
                         case '+':
-                            map.put(new GamePoint(x,y), new SpeedUp());
+                            map.put(new GamePoint(x,y), new SpeedUp(new GamePoint(x,y)));
                             break;
                         case 'G':
-                            map.put(new GamePoint(x,y), new Gyroscope());
+                            map.put(new GamePoint(x,y), new Gyroscope(new GamePoint(x,y)));
                             break;
                         case 'A':
-                            map.put(new GamePoint(x,y), new Accelerator());
+                            map.put(new GamePoint(x,y), new Accelerator(new GamePoint(x,y)));
                             break;
                         case 'D':
-                            map.put(new GamePoint(x,y), new Ramp());
+                            map.put(new GamePoint(x,y), new Ramp(new GamePoint(x,y)));
                             break;
                         case 'O':
                             map.put(new GamePoint(x,y), new Ball(new GamePoint(x,y), 1, new Circle()));

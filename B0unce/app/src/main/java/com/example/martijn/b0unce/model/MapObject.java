@@ -11,6 +11,10 @@ public class MapObject implements Serializable {
     protected Map map;
     protected GamePoint position;
 
+    public MapObject(GamePoint position) {
+        this.position = position;
+    }
+
     public Map getMap() {
         return map;
     }

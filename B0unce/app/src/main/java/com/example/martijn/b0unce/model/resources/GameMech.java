@@ -1,5 +1,7 @@
 package com.example.martijn.b0unce.model.resources;
 
+import android.graphics.Point;
+
 import com.example.martijn.b0unce.model.MapObject;
 import com.example.martijn.b0unce.model.ball.Ball;
 import com.example.martijn.b0unce.model.ball.Circle;
