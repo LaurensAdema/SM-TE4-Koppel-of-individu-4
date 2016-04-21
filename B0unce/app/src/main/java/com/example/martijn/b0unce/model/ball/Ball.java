@@ -19,18 +19,15 @@ public class Ball extends MapObject{
     private float speed;
     private float weight;
     private BallType type;
-    private Map map;
-    private GamePoint position;
     private int direction;
     private int bounces;
 
     private static int MAXSPEED = 5;
-    private static double RADIUS = 0.7;
+    public static double RADIUS = 0.7;
 
     public Ball(GamePoint position, int weight, BallType type) {
         this.position   = position;
         this.weight     = weight;
-        this.map        = map;
         this.type       = type;
     }
 
@@ -54,10 +51,10 @@ public class Ball extends MapObject{
                             posOK = false;
                             break;
                         case "SpeedUp":
-                            speed = speed * ((SpeedUp)collisionObject).getMultiplier();
+                            speedUp();
                             break;
                         case "SpeedDown":
-                            speed = speed * -((SpeedDown)collisionObject).getMultiplier();
+                            speedDown();
                             break;
                         case "ReSwipe":
                             map.setSwipe(true);
@@ -91,11 +88,15 @@ public class Ball extends MapObject{
             speed = 0;
     }
 
-    public GamePoint getPosition() {
-        return position;
-    }
-
     public int getBounces() {
         return bounces;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public BallType getType() {
+        return type;
     }
 }

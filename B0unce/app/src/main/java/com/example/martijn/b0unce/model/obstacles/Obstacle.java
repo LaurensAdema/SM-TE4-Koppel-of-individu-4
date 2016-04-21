@@ -12,7 +12,6 @@ import com.example.martijn.b0unce.model.resources.GamePoint;
  */
 public abstract class Obstacle extends MapObject{
     private int texture = 0xff000000;
-    private GamePoint position;
 
     public abstract void enter(Ball ball);
     public abstract void leave(Ball ball);

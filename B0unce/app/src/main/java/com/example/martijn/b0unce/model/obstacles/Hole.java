@@ -3,12 +3,12 @@ package com.example.martijn.b0unce.model.obstacles;
 import com.example.martijn.b0unce.model.ball.Ball;
 
 /**
- * Created by Martijn on 20-4-2016.
+ * Created by laure on 21-4-2016.
  */
-public class SpeedUp extends Obstacle {
+public class Hole extends Obstacle {
     @Override
     public void enter(Ball ball) {
-        
+
     }
 
     @Override

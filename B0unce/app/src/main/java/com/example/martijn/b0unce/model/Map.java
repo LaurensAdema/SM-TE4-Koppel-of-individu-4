@@ -35,7 +35,6 @@ public class Map implements Serializable {
     private Ball ball;
 
     public static int GRIDSIZE = 10;
-    public static int MULTIPLIER = 2;
 
     public Map(Account player, int level, int maxBounces, String name, HashMap<GamePoint, MapObject> map, Ball ball) {
         swipe = true;
@@ -54,7 +53,10 @@ public class Map implements Serializable {
 
     public boolean tick() {
         // TODO update
-        ball.Move();
+        if(!swipe)
+        {
+            ball.Move();
+        }
         return true;
     }
 
@@ -62,12 +64,13 @@ public class Map implements Serializable {
         return maxBounces;
     }
 
-    public boolean Swipe(double angle) {
-        if(swipe) {
+    public boolean Swipe(int angle) {
+        if(!swipe) {
             //TODO: Move ball
+            swipe = true;
+            ball.setDirection(angle);
             return true;
         }
-
         return false;
     }
 
@@ -112,10 +115,10 @@ public class Map implements Serializable {
                             map.put(new GamePoint(x,y), new ReSwipe());
                             break;
                         case '-':
-                            map.put(new GamePoint(x,y), new SpeedDown(MULTIPLIER));
+                            map.put(new GamePoint(x,y), new SpeedDown());
                             break;
                         case '+':
-                            map.put(new GamePoint(x,y), new SpeedUp(MULTIPLIER));
+                            map.put(new GamePoint(x,y), new SpeedUp());
                             break;
                         case 'G':
                             map.put(new GamePoint(x,y), new Gyroscope());
@@ -147,5 +150,9 @@ public class Map implements Serializable {
 
     public void setSwipe(boolean swipe) {
         this.swipe = swipe;
+    }
+
+    public HashMap<GamePoint, MapObject> getObstacles() {
+        return obstacles;
     }
 }

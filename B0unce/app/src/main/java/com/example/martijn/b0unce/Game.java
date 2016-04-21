@@ -50,6 +50,7 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         map = (Map) getIntent().getSerializableExtra("level");
+        map.getBall().setMap(map);
 
         TableLayout content = (TableLayout) findViewById(R.id.game);
 
@@ -107,7 +108,8 @@ public class Game extends AppCompatActivity {
                         up = new GamePoint(event.getX(), event.getY());
 
                         double rad = Math.atan2(down.y-up.y,down.x-up.x) + Math.PI;
-                        map.Swipe((rad * 180 / Math.PI + 180) % 360);
+                        double angle = (rad * 180 / Math.PI + 180) % 360;
+                        map.Swipe(((int) angle));
 
                         /*AlertDialog.Builder alertbox = new AlertDialog.Builder(Game.this);
                         alertbox.setMessage((rad * 180 / Math.PI + 180) % 360 + "rad");
